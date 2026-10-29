@@ -14,7 +14,8 @@ public class FacebookAnalyticsPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "enableAdvertiserTracking", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "disableAdvertiserTracking", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "getAdvertiserTrackingStatus", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "getPluginVersion", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "getPluginVersion", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getAnonymousId", returnType: CAPPluginReturnPromise)
     ]
 
     private let implementation = FacebookAnalytics()
@@ -88,6 +89,12 @@ public class FacebookAnalyticsPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func getPluginVersion(_ call: CAPPluginCall) {
         call.resolve([
             "version": implementation.getPluginVersion()
+        ])
+    }
+
+    @objc func getAnonymousId(_ call: CAPPluginCall) {
+        call.resolve([
+            "value": AppEvents.shared.anonymousID
         ])
     }
 

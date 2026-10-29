@@ -36,4 +36,8 @@ export class FacebookAnalyticsWeb extends WebPlugin implements FacebookAnalytics
       version: 'web',
     };
   }
+
+  async getAnonymousId(): Promise<{ value: string }> {
+    throw this.unimplemented('Facebook anonymous ID is not available on web.');
+  }
 }

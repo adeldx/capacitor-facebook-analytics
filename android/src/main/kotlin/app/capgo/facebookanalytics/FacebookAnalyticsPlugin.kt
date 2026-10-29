@@ -156,6 +156,20 @@ class FacebookAnalyticsPlugin : Plugin() {
         call.resolve(ret)
     }
 
+    @PluginMethod
+    fun getAnonymousId(call: PluginCall) {
+        try {
+            val anonymousId = AppEventsLogger.getAnonymousAppDeviceGUID(context)
+
+            val result = JSObject()
+            result.put("value", anonymousId)
+
+            call.resolve(result)
+        } catch (error: Exception) {
+            call.reject("Unable to get Meta anonymous ID", error)
+        }
+    }
+
     private fun getLogger(): AppEventsLogger {
         if (!::logger.isInitialized) {
             logger = AppEventsLogger.newLogger(context)
